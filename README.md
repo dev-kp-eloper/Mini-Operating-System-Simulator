@@ -94,11 +94,11 @@ A hierarchical tree model representing nested directories and files, similar to 
 ### 🌳 Tree Hierarchy
 ```mermaid
 graph LR
-    Root[/] --> Bin[bin]
-    Root --> Users[users]
-    Users --> Devesh[devesh]
-    Devesh --> Notes(notes.txt)
-    Devesh --> Projects(projects)
+    Root["/"] --> Bin["bin"]
+    Root --> Users["users"]
+    Users --> Devesh["devesh"]
+    Devesh --> Notes["notes.txt"]
+    Devesh --> Projects["projects"]
 ```
 
 - **Recursive Logic**: Directory sizes are calculated dynamically by traversing the entire nested structure.
