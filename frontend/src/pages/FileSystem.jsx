@@ -93,23 +93,23 @@ const FileSystem = () => {
             <div className="flex flex-col gap-6 max-h-full">
                 <div className="flex justify-between items-end">
                     <div>
-                        <h1 className="text-2xl font-bold text-white mb-2">FileManager v2.0</h1>
-                        <p className="text-gray-400">Manage persistent storage and load files into RAM buffers.</p>
+                        <h1 className="text-xl font-bold text-white mb-1">FileManager v2.0</h1>
+                        <p className="text-xs text-gray-400">Manage persistent storage and load files into RAM buffers.</p>
                     </div>
                     
-                    <div className="bg-dark-800 p-4 rounded-xl border border-dark-700 w-64">
-                        <div className="flex justify-between text-xs mb-1">
-                            <span className="text-gray-400 font-mono">STORAGE UTILIZATION</span>
+                    <div className="bg-dark-800 p-3 rounded-xl border border-dark-700 w-56 shadow-lg">
+                        <div className="flex justify-between text-[10px] mb-1">
+                            <span className="text-gray-500 font-bold uppercase tracking-tighter">Utilization</span>
                             <span className="text-brand-blue font-bold">{stats.percent}%</span>
                         </div>
-                        <div className="w-full bg-dark-900 h-2 rounded-full overflow-hidden">
+                        <div className="w-full bg-dark-900 h-1.5 rounded-full overflow-hidden">
                             <div 
                                 className={`h-full transition-all duration-500 ${stats.percent > 90 ? 'bg-brand-red' : 'bg-brand-blue'}`}
                                 style={{ width: `${stats.percent}%` }}
                             ></div>
                         </div>
-                        <p className="text-[10px] text-gray-500 mt-1 text-right">
-                            {Math.round(stats.used / 1024)}KB / {Math.round(stats.total / 1024)}KB Used
+                        <p className="text-[9px] text-gray-500 mt-1 text-right">
+                            {Math.round(stats.used / 1024)}KB / {Math.round(stats.total / 1024)}KB
                         </p>
                     </div>
                 </div>
@@ -122,20 +122,20 @@ const FileSystem = () => {
 
                 <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
                     {/* Create Panel */}
-                    <div className="bg-dark-800 rounded-xl border border-dark-700 p-6 shadow-lg h-fit">
-                        <h2 className="text-lg font-semibold text-white mb-4">New Entry</h2>
-                        <form onSubmit={handleCreate} className="space-y-4">
+                    <div className="bg-dark-800 rounded-xl border border-dark-700 p-4 shadow-lg h-fit">
+                        <h2 className="text-base font-bold text-white mb-3">New Entry</h2>
+                        <form onSubmit={handleCreate} className="space-y-3">
                             <input
                                 placeholder="Name"
                                 value={newItem.name}
                                 onChange={e => setNewItem({...newItem, name: e.target.value})}
-                                className="w-full bg-dark-900 border border-dark-600 rounded-lg px-4 py-2 text-white focus:outline-none focus:border-brand-blue"
+                                className="w-full bg-dark-900 border border-dark-600 rounded-lg px-3 py-1.5 text-xs text-white focus:outline-none focus:border-brand-blue"
                                 required
                             />
                             <select 
                                 value={newItem.type} 
                                 onChange={e => setNewItem({...newItem, type: e.target.value})}
-                                className="w-full bg-dark-900 border border-dark-600 rounded-lg px-4 py-2 text-white outline-none focus:border-brand-blue"
+                                className="w-full bg-dark-900 border border-dark-600 rounded-lg px-3 py-1.5 text-xs text-white outline-none focus:border-brand-blue"
                             >
                                 <option value="FILE">File</option>
                                 <option value="DIRECTORY">Directory</option>
@@ -145,10 +145,10 @@ const FileSystem = () => {
                                     placeholder="File content..."
                                     value={newItem.content}
                                     onChange={e => setNewItem({...newItem, content: e.target.value})}
-                                    className="w-full bg-dark-900 border border-dark-600 rounded-lg px-4 py-2 text-white focus:outline-none focus:border-brand-blue min-h-[100px] text-sm font-mono"
+                                    className="w-full bg-dark-900 border border-dark-600 rounded-lg px-3 py-1.5 text-white focus:outline-none focus:border-brand-blue min-h-[80px] text-[11px] font-mono"
                                 />
                             )}
-                            <button type="submit" className="w-full bg-brand-blue hover:bg-blue-600 text-white font-medium py-2 rounded-lg transition">
+                            <button type="submit" className="w-full bg-brand-blue font-bold hover:bg-blue-600 text-white py-1.5 rounded-lg transition text-xs">
                                 Allocate Space
                             </button>
                         </form>
@@ -157,7 +157,7 @@ const FileSystem = () => {
                     {/* Explorer Panel */}
                     <div className="lg:col-span-2 bg-dark-800 rounded-xl border border-dark-700 flex flex-col shadow-lg overflow-hidden min-h-[500px]">
                         {/* Breadcrumbs */}
-                        <div className="bg-dark-900/50 px-4 py-3 border-b border-dark-700 flex items-center gap-2 overflow-x-auto whitespace-nowrap scrollbar-hide">
+                        <div className="bg-dark-900/50 px-3 py-2 border-b border-dark-700 flex items-center gap-2 overflow-x-auto whitespace-nowrap scrollbar-hide">
                             {path.map((p, i) => (
                                 <React.Fragment key={p._id}>
                                     <button 
@@ -172,25 +172,25 @@ const FileSystem = () => {
                         </div>
 
                         {/* File Grid */}
-                        <div className="p-4 grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-4 overflow-y-auto">
+                        <div className="p-3 grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-3 overflow-y-auto">
                             {items.length === 0 && (
-                                <div className="col-span-full py-20 text-center text-gray-500 italic">Folder is empty</div>
+                                <div className="col-span-full py-16 text-center text-gray-600 italic text-sm">Folder is empty</div>
                             )}
                             {items.map(item => (
                                 <div 
                                     key={item._id}
                                     onDoubleClick={() => item.type === 'DIRECTORY' ? navigateTo(item) : handleOpenFile(item)}
-                                    className="group relative bg-dark-900/40 border border-dark-700 hover:border-brand-blue/50 p-4 rounded-xl flex flex-col items-center gap-2 transition cursor-pointer"
+                                    className="group relative bg-dark-900/40 border border-dark-700 hover:border-brand-blue/50 p-3 rounded-xl flex flex-col items-center gap-1.5 transition cursor-pointer"
                                 >
-                                    <span className="text-4xl group-hover:scale-110 transition duration-300 select-none">
+                                    <span className="text-3xl group-hover:scale-110 transition duration-300 select-none">
                                         {item.type === 'DIRECTORY' ? '📂' : '📄'}
                                     </span>
-                                    <span className="text-xs font-medium text-gray-300 text-center truncate w-full">{item.name}</span>
-                                    <span className="text-[10px] text-gray-500 uppercase">{item.size || 0} B</span>
+                                    <span className="text-[11px] font-bold text-gray-300 text-center truncate w-full">{item.name}</span>
+                                    <span className="text-[9px] text-gray-500 font-bold uppercase tracking-tighter">{item.size || 0} B</span>
                                     
                                     <button 
                                         onClick={(e) => handleDelete(e, item._id)}
-                                        className="absolute -top-1 -right-1 bg-red-900/80 text-white w-5 h-5 rounded-full flex items-center justify-center text-[8px] opacity-0 group-hover:opacity-100 hover:bg-red-600 transition"
+                                        className="absolute -top-1 -right-1 bg-red-900/80 text-white w-4 h-4 rounded-full flex items-center justify-center text-[8px] opacity-0 group-hover:opacity-100 hover:bg-red-600 transition shadow-lg"
                                     >✕</button>
                                 </div>
                             ))}
