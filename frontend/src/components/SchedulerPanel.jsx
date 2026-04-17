@@ -19,15 +19,15 @@ const SchedulerPanel = ({ reload }) => {
     };
 
     return (
-        <div className="bg-dark-800 p-5 rounded-xl border border-dark-700 shadow-lg">
-            <h3 className="font-bold text-white mb-4 flex items-center gap-2">
+        <div className="bg-dark-800 p-4 rounded-xl border border-dark-700 shadow-lg">
+            <h3 className="text-sm font-bold text-white mb-2 flex items-center gap-2">
                 <span className="text-brand-purple">⚙️</span> CPU Scheduler Setup
             </h3>
-            <div className="space-y-4">
+            <div className="space-y-3">
                 <div>
-                    <label className="block text-xs text-gray-500 mb-1 uppercase tracking-wider">Select Algorithm</label>
+                    <label className="block text-[10px] text-gray-500 mb-1 uppercase tracking-wider">Algorithm</label>
                     <select 
-                        className="w-full bg-dark-900 border border-dark-600 text-sm text-gray-200 rounded p-2 focus:outline-none focus:border-brand-purple"
+                        className="w-full bg-dark-900 border border-dark-600 text-xs text-gray-200 rounded p-1.5 focus:outline-none focus:border-brand-purple"
                         value={algorithm}
                         onChange={(e) => setAlgorithm(e.target.value)}
                     >
@@ -39,10 +39,10 @@ const SchedulerPanel = ({ reload }) => {
 
                 {algorithm === 'RR' && (
                     <div>
-                        <label className="block text-xs text-gray-500 mb-1 uppercase tracking-wider">Time Quantum (ms)</label>
+                        <label className="block text-[10px] text-gray-500 mb-1 uppercase tracking-wider">Time Quantum (ms)</label>
                         <input 
                             type="number" 
-                            className="w-full bg-dark-900 border border-dark-600 text-sm text-gray-200 rounded p-2 focus:outline-none focus:border-brand-purple"
+                            className="w-full bg-dark-900 border border-dark-600 text-xs text-gray-200 rounded p-1.5 focus:outline-none focus:border-brand-purple"
                             value={timeQuantum}
                             onChange={(e) => setTimeQuantum(e.target.value)}
                         />
@@ -52,9 +52,9 @@ const SchedulerPanel = ({ reload }) => {
                 <button 
                     onClick={handleRun}
                     disabled={isRunning}
-                    className="w-full mt-4 bg-brand-purple hover:bg-purple-600 text-white font-medium py-3 rounded-lg shadow-[0_0_15px_rgba(139,92,246,0.3)] transition disabled:opacity-50"
+                    className="w-full mt-2 bg-brand-purple hover:bg-purple-600 text-white text-xs font-bold py-2 rounded-lg shadow-[0_0_15px_rgba(139,92,246,0.3)] transition disabled:opacity-50"
                 >
-                    {isRunning ? 'Executing simulation...' : `Execute ${algorithm} Run`}
+                    {isRunning ? 'Executing...' : `Execute ${algorithm} Run`}
                 </button>
                 <p className="text-xs text-gray-500 text-center mt-3">
                     Loads READY processes from queue and simulates execution over time.

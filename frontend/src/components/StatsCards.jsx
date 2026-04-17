@@ -9,7 +9,7 @@ const StatsCards = ({ processes, memory, storage }) => {
     const memoryUsagePercent = memory.length ? Math.round((usedMemoryBlocks / memory.length) * 100) : 0;
 
     return (
-        <div className="grid grid-cols-1 md:grid-cols-5 gap-4 mb-6">
+        <div className="grid grid-cols-1 md:grid-cols-5 gap-3 mb-4">
             <Card title="Active Queue" value={totalCurrentProcesses} color="border-brand-blue" />
             <Card title="Running Cores" value={runningProcesses} color="border-brand-green" />
             <Card title="Completed Jobs" value={terminatedProcesses} color="border-gray-500" />
@@ -20,9 +20,9 @@ const StatsCards = ({ processes, memory, storage }) => {
 };
 
 const Card = ({ title, value, color }) => (
-    <div className={`bg-dark-800 p-4 rounded-xl border-l-4 ${color} shadow-lg flex flex-col justify-between`}>
-        <h3 className="text-gray-400 text-sm font-medium mb-2">{title}</h3>
-        <p className="text-2xl font-bold text-white leading-none">{value}</p>
+    <div className={`bg-dark-800 p-3 rounded-xl border-l-4 ${color} shadow-lg flex flex-col justify-between`}>
+        <h3 className="text-gray-400 text-[10px] uppercase font-bold mb-1">{title}</h3>
+        <p className="text-xl font-bold text-white leading-none">{value}</p>
     </div>
 );
 

@@ -71,8 +71,8 @@ const ProcessTable = ({ processes, reload }) => {
 
     return (
         <div className="bg-dark-800 rounded-xl border border-dark-700 overflow-hidden flex flex-col flex-1 h-full shadow-lg">
-            <div className="p-4 border-b border-dark-700 bg-dark-800 flex justify-between items-center">
-                <h3 className="font-bold text-white flex items-center gap-2">
+            <div className="p-3 border-b border-dark-700 bg-dark-800 flex justify-between items-center">
+                <h3 className="text-sm font-bold text-white flex items-center gap-2">
                     <span className="text-brand-blue">💻</span> Process Queue
                 </h3>
                 <div className="flex gap-2">
@@ -94,24 +94,24 @@ const ProcessTable = ({ processes, reload }) => {
             </div>
             
             {/* Create Process Form */}
-            <form onSubmit={handleAdd} className="p-4 grid grid-cols-5 gap-3 bg-dark-900/50 border-b border-dark-700">
-                <input required value={name} onChange={e=>setName(e.target.value)} type="text" placeholder="Proc Name" className="bg-dark-800 text-sm p-2 rounded border border-dark-600 focus:outline-none focus:border-brand-blue" />
-                <input required value={burstTime} onChange={e=>setBurstTime(e.target.value)} type="number" placeholder="Burst (ms)" className="bg-dark-800 text-sm p-2 rounded border border-dark-600 focus:outline-none focus:border-brand-blue" />
-                <input required value={priority} onChange={e=>setPriority(e.target.value)} type="number" placeholder="Priority (0=High)" className="bg-dark-800 text-sm p-2 rounded border border-dark-600 focus:outline-none focus:border-brand-blue" />
-                <input required value={memoryRequired} onChange={e=>setMemoryRequired(e.target.value)} type="number" placeholder="Memory (bytes)" className="bg-dark-800 text-sm p-2 rounded border border-dark-600 focus:outline-none focus:border-brand-blue" />
-                <button type="submit" className="bg-brand-blue text-white rounded font-medium hover:bg-blue-600 transition text-sm">Add Process</button>
+            <form onSubmit={handleAdd} className="p-3 grid grid-cols-5 gap-2 bg-dark-900/50 border-b border-dark-700">
+                <input required value={name} onChange={e=>setName(e.target.value)} type="text" placeholder="Name" className="bg-dark-800 text-xs p-1.5 rounded border border-dark-600 focus:outline-none focus:border-brand-blue" />
+                <input required value={burstTime} onChange={e=>setBurstTime(e.target.value)} type="number" placeholder="Burst" className="bg-dark-800 text-xs p-1.5 rounded border border-dark-600 focus:outline-none focus:border-brand-blue" />
+                <input required value={priority} onChange={e=>setPriority(e.target.value)} type="number" placeholder="Pri" title="Priority (0=High)" className="bg-dark-800 text-xs p-1.5 rounded border border-dark-600 focus:outline-none focus:border-brand-blue" />
+                <input required value={memoryRequired} onChange={e=>setMemoryRequired(e.target.value)} type="number" placeholder="Mem" title="Memory (bytes)" className="bg-dark-800 text-xs p-1.5 rounded border border-dark-600 focus:outline-none focus:border-brand-blue" />
+                <button type="submit" className="bg-brand-blue text-white rounded font-bold hover:bg-blue-600 transition text-xs">Add</button>
             </form>
 
-            <div className="flex-1 overflow-y-auto p-4">
+            <div className="flex-1 overflow-y-auto p-3">
                 <table className="w-full text-left text-sm text-gray-300">
-                    <thead className="text-xs text-gray-500 uppercase bg-dark-900/50">
+                    <thead className="text-[10px] text-gray-500 uppercase bg-dark-900/50">
                         <tr>
-                            <th className="px-3 py-2">PID</th>
-                            <th className="px-3 py-2">Name</th>
-                            <th className="px-3 py-2">State</th>
-                            <th className="px-3 py-2 text-center">Burst</th>
-                            <th className="px-3 py-2 text-center">Mem</th>
-                            <th className="px-3 py-2 text-right">Action</th>
+                            <th className="px-2 py-1.5">PID</th>
+                            <th className="px-2 py-1.5">Name</th>
+                            <th className="px-2 py-1.5">State</th>
+                            <th className="px-2 py-1.5 text-center">T</th>
+                            <th className="px-2 py-1.5 text-center">M</th>
+                            <th className="px-2 py-1.5 text-right">#</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -119,11 +119,11 @@ const ProcessTable = ({ processes, reload }) => {
                             <tr><td colSpan="6" className="text-center py-8 text-gray-500 italic">No processes in queue. Add one to begin.</td></tr>
                         )}
                         {processes.map(p => (
-                            <tr key={p._id} className="border-b border-dark-700 hover:bg-dark-700/50">
-                                <td className="px-3 py-2 font-mono text-xs">{p.pid}</td>
-                                <td className="px-3 py-2 font-medium text-white">{p.name}</td>
-                                <td className="px-3 py-2">
-                                    <span className={`px-2 py-1 text-xs rounded-full font-medium
+                            <tr key={p._id} className="border-b border-dark-700 hover:bg-dark-700/50 text-xs">
+                                <td className="px-2 py-1.5 font-mono text-[10px] opacity-70">{p.pid}</td>
+                                <td className="px-2 py-1.5 font-medium text-white">{p.name}</td>
+                                <td className="px-2 py-1.5">
+                                    <span className={`px-1.5 py-0.5 text-[10px] rounded-full font-bold
                                         ${p.state === 'RUNNING' ? 'bg-brand-green/20 text-brand-green' : ''}
                                         ${p.state === 'READY' || p.state === 'NEW' ? 'bg-brand-yellow/20 text-brand-yellow' : ''}
                                         ${p.state === 'WAITING' ? 'bg-orange-500/20 text-orange-400' : ''}
@@ -132,11 +132,11 @@ const ProcessTable = ({ processes, reload }) => {
                                         {p.state}
                                     </span>
                                 </td>
-                                <td className="px-3 py-2 text-center">{p.burstTime}</td>
-                                <td className="px-3 py-2 text-center">{p.memoryRequired}B</td>
-                                <td className="px-3 py-2 text-right">
+                                <td className="px-2 py-1.5 text-center">{p.burstTime}</td>
+                                <td className="px-2 py-1.5 text-center">{p.memoryRequired}B</td>
+                                <td className="px-2 py-1.5 text-right">
                                     {p.state !== 'TERMINATED' && (
-                                        <button onClick={() => handleKill(p._id)} className="text-brand-red hover:text-red-400 p-1">Kill</button>
+                                        <button onClick={() => handleKill(p._id)} className="text-brand-red text-[10px] hover:underline p-1 uppercase font-bold">Kill</button>
                                     )}
                                 </td>
                             </tr>

@@ -14,9 +14,9 @@ const MemoryVisualizer = ({ memory, reload }) => {
     }
 
     return (
-        <div className="bg-dark-800 p-5 rounded-xl border border-dark-700 shadow-lg mt-4">
-            <div className="flex justify-between items-center mb-4">
-                <h3 className="font-bold text-white flex items-center gap-2">
+        <div className="bg-dark-800 p-3 rounded-xl border border-dark-700 shadow-lg mt-2">
+            <div className="flex justify-between items-center mb-2">
+                <h3 className="text-sm font-bold text-white flex items-center gap-2">
                     <span className="text-brand-green">💾</span> RAM Allocation (First-Fit)
                 </h3>
                 <button onClick={handleReset} className="text-xs border border-dark-600 hover:bg-dark-700 px-3 py-1 rounded transition text-gray-300">
@@ -34,12 +34,12 @@ const MemoryVisualizer = ({ memory, reload }) => {
                         <div 
                             key={block._id}
                             title={`Block ${block.blockId} | ${block.size}B | ${block.isFree ? 'Free' : `Used by ${block.processId?.pid}`}`}
-                            className={`flex flex-col justify-center items-center rounded text-xs select-none relative group overflow-hidden border
+                            className={`flex flex-col justify-center items-center rounded text-[10px] select-none relative group overflow-hidden border
                                 ${block.isFree 
                                     ? 'bg-dark-800 border-dark-600 text-gray-500' 
                                     : 'bg-brand-blue/20 border-brand-blue text-blue-200'
                                 }`}
-                            style={{ flex: '1 1 8%', minWidth: '40px', height: '60px' }}
+                            style={{ flex: '1 1 8%', minWidth: '30px', height: '45px' }}
                         >
                             <span className="font-bold opacity-50 absolute -top-1 right-1 text-[10px]">{idx}</span>
                             {block.isFree ? 'FREE' : <span className="font-mono">{block.processId?.pid}</span>}
@@ -53,7 +53,7 @@ const MemoryVisualizer = ({ memory, reload }) => {
                     ))}
                 </div>
             )}
-            <div className="mt-3 flex justify-between text-xs text-gray-500">
+            <div className="mt-2 flex justify-between text-[10px] text-gray-500">
                 <span>0x0000</span>
                 <span>Max Capacity: {totalBlocksCount * blockSize} Bytes</span>
             </div>
